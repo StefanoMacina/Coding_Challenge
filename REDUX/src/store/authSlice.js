@@ -1,0 +1,36 @@
+import { createSlice } from "@reduxjs/toolkit";
+import internalMemory from "../utility/internalMemory";
+
+const authSlice = () => {
+
+  const token = internalMemory.get('token') || null;
+  const user = internalMemory.get('user') || null;
+
+
+
+  return createSlice({
+    name: "auth",
+    initialState: {
+      token,
+      user
+    },
+    reducers: {
+      login: (state, action) => {
+        state.token = action.payload.token;
+        state.user = action.payload.user;
+        internalMemory.save('token', action.payload.token)
+        internalMemory.save('user', action.payload.user)
+      },
+      logout: (state) => {
+        state.token = null;
+        state.user = null;
+        internalMemory.remove('token')
+        internalMemory.remove('user')
+      },
+    },
+  });
+  
+}
+export const { login, logout } = authSlice().actions;
+
+export default authSlice().reducer;
