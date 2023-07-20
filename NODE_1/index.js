@@ -2,6 +2,8 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 
+const db = require("./db");
+
 const helmet = require('helmet');
 const cors = require('cors');
 
@@ -18,6 +20,8 @@ app.get(['/', '/status' , '/ping'], ( _ , res ) => {
 app.use('/auth', require('./routes/auth'))
 
 app.use('/api', require('./routes/api'))
+
+db.connect();
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log(`server running at http://localhost:${process.env.SERVER_PORT}`);

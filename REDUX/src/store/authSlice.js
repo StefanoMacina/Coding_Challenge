@@ -29,7 +29,7 @@ const authSlice = () => {
       },
     },
   });
-  
+
 }
 export const { login, logout } = authSlice().actions;
 
