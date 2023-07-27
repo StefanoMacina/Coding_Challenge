@@ -1,13 +1,13 @@
 const express = require('express')
+const { getUserToken } = require('../../controllers/auth')
+
 
 const app = express.Router()
 
 /**
  * @path /auth/token
  */
-app.get('/token' , (req, res) => {
-    return res.status(200).json({message : 'success'})
-})
+app.post('/token', getUserToken);
 
 
 module.exports = app

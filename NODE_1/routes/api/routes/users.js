@@ -1,6 +1,6 @@
 const express = require('express');
-const { getAllUsers, getUserById } = require('../../../controllers/api/users');
-const { authUser } = require('../../middlewares/auth');
+const { getAllUsers, getUserById, createUser } = require('../../../controllers/api/users');
+const { authUser } = require('../../../middlewares/auth');
 const app = express.Router()
 
 
@@ -10,10 +10,12 @@ const app = express.Router()
  */
 app.get('/', getAllUsers)
 
+
+
 /**
- *  get user by id
- * @path /api/users/:id
+ *  create new user
+ * @path /api/users
  */
-app.post('/:id', authUser(2) ,getUserById)
+app.post("/", createUser)
 
 module.exports = app

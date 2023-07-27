@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 const userSchema = new Schema({
   firstName: {
@@ -26,6 +27,8 @@ const userSchema = new Schema({
     enum: ["ADMIN", "USER"],
   }
 }, { timestamps: true, strict: true});
+
+userSchema.plugin(mongoosePaginate);
 
 const User = model("User", userSchema);
 
