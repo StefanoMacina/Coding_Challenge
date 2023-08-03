@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 
 
 const getAllUsers = async (req, res) => {
-    
+
     const page = req.query.page || 1;
     const limit = req.query.limit || 10;
 
@@ -23,7 +23,8 @@ const createUser = async (req, res) => {
         firstName: Joi.string().required(),
         lastName: Joi.string().required(),
         email: Joi.string().required(),
-        password: Joi.string().required()
+        password: Joi.string().required(),
+        role: Joi.string().optional().valid("AUTHOR", "USER")
     });
 
     try{
@@ -46,7 +47,7 @@ const createUser = async (req, res) => {
 }
 
 
-module.exports = { 
+module.exports = {
     getAllUsers,
     createUser
 }

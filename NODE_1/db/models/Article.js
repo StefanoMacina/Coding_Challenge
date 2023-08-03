@@ -2,9 +2,17 @@ const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 
 const articleSchema = new Schema({
-    user: {
-        type: Schema.Types.ObjectId,
-    },
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+  },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+    default: null,
+  },
+
   title: {
     type: String,
     required: true,
@@ -24,8 +32,8 @@ const articleSchema = new Schema({
 }, { timestamps: true, strict: true });
 
 articleSchema.pre("save", function (next) {
-    this.slug = this.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
-    next();
+  this.slug = this.title.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+  next();
 });
 
 const Article = model("Article", articleSchema);

@@ -24,7 +24,7 @@ const userSchema = new Schema({
     type: String,
     required: false,
     default: "USER",
-    enum: ["ADMIN", "USER"],
+    enum: ["ADMIN", "AUTHOR", "USER"],
   }
 }, { timestamps: true, strict: true});
 
